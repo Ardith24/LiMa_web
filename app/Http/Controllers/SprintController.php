@@ -10,7 +10,9 @@ class SprintController extends Controller
 {
     public function index_api()
     {
-        return Sprint::all();
+        $get_data = json_encode(array('results' => Sprint::all()));
+        // return Sprint::all();
+        return $get_data;
     }
 
     public function index()

@@ -3,9 +3,9 @@
 @section('content')
 
 <div class="container">
-    <a href="{{ route('sprint.create') }}">
+    {{-- <a href="{{ route('sprint.create') }}">
         <button type="button" class="btn btn-primary">Buat Sprint Baru</button>
-    </a>
+    </a> --}}
     <h4>Daftar Sprint</h4>
 
     @if ($message = Session::get('message'))
