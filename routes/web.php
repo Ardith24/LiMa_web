@@ -25,3 +25,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 //CRUD Sprint
 Route::resource('/kejar', 'KejarController');
 Route::resource('/sprint', 'SprintController');
+Route::resource('/task', 'TaskController');

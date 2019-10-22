@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Sprint;
+use App\Task;
 use Response;
 use Illuminate\Http\Request;
 
@@ -10,8 +11,8 @@ class SprintController extends Controller
 {
     public function index_api()
     {
+        // do this
         $get_data = array('results' => Sprint::all());
-        // return Sprint::all();
         return $get_data;
     }
 
@@ -40,7 +41,9 @@ class SprintController extends Controller
     public function show($id)
     {
         $sprint = Sprint::findOrFail($id);
-        return view('sprint.show', compact('sprint'));
+        $task = Task::findOrFail($id);
+
+        return view('sprint.show', compact('sprint', 'task'));
     }
 
     public function store(Request $request)

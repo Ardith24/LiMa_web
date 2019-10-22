@@ -34,14 +34,13 @@
             </div>
         </div>
         <div class="col-xs-6">
-            <a href="{{ route('task.create') }}">
-                <button type="button" class="btn btn-default">Tambah Task</button>
-            </a>
+            <a href="#" class="btn btn-default">Tambah Task</a>
             <h3 class="text-center">Task</h3>
             <div class="well" style="max-height: 500px; overflow: auto;">
                 <ul id="check-list-box" class="list-group checked-list-box">
-                    <li class="list-group-item">{{ $task->nama_task}}</li>
-                    <li class="list-group-item">{{ $task->nama_task}}</li>
+                    <li class="list-group-item">Membuat Menu Navigasi</li>
+                    <li class="list-group-item" data-color="success">Membuat Footer</li>
+                    <li class="list-group-item" data-color="info">Konten Website</li>
                 </ul>
                 <br />
                 <button class="btn btn-primary col-xs-12" id="get-checked-data">Selesai</button>
