@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Start your development with a Design System for Bootstrap 4.">
   <meta name="author" content="Creative Tim">
-  <title>LIMa STT NF</title>
+  <title>LIMA STT NF</title>
   <!-- Favicon -->
   <link href="{!! asset('theme/assets/img/brand/favicon.png') !!}" rel="icon" type="image/png">
   <!-- Fonts -->
@@ -174,7 +174,7 @@
             <div class="card bg-secondary shadow border-0">
               <div class="card-header bg-white pb-5">
                 <div class="text-muted text-center mb-3">
-                  <small>Sign in with</small>
+                  <small>Login dengan akun</small>
                 </div>
                 <div class="btn-wrapper text-center">
                   <a href="#" class="btn btn-neutral btn-icon">
@@ -195,7 +195,7 @@
               </div>
               <div class="card-body px-lg-5 py-lg-5">
                 <div class="text-center text-muted mb-4">
-                  <small>Or sign in with credentials</small>
+                  <small>Login</small>
                 </div>
                 
                 <form class="form-horizontal" method="POST" action="{{ route('login') }}">
@@ -233,7 +233,7 @@
                     <input class="custom-control-input" id=" customCheckLogin" type="checkbox" {{ old('remember') ? 'checked' : '' }}>
                     <label class="custom-control-label" for=" customCheckLogin">
                       <label>
-						<span type="checkbox" name="remember"> Remember Me</span>
+						<span type="checkbox" name="remember"> Ingat saya </span>
                       </label>
                     </label>
                   </div>
@@ -252,12 +252,12 @@
             <div class="row mt-3">
               <div class="col-6">
                 <a href="{{ route('password.request') }}" class="text-light">
-                  <small>Forgot password?</small>
+                  <small>Lupa password?</small>
                 </a>
               </div>
               <div class="col-6 text-right">
                 <a href="{{route('register')}}" class="text-light">
-                  <small>Create new account</small>
+                  <small>Buat akun baru</small>
                 </a>
               </div>
             </div>

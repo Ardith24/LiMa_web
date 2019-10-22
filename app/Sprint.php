@@ -9,8 +9,5 @@ class Sprint extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = [
-        'nama_sprint', 'desc_sprint', 'tgl_mulai', 'tgl_selesai'
-    ];
-    protected $dates = ['deleted_at'];
+    protected $fillable = ['nama_sprint', 'desc_sprint', 'tgl_mulai', 'tgl_selesai'];
 }
