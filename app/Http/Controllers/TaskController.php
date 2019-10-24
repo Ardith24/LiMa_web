@@ -40,21 +40,22 @@ class TaskController extends Controller
 
     public function show($id)
     {
-        $sprint = Sprint::findOrFail($id);
+        // $sprint = Sprint::findOrFail($id);
         $task = Task::findOrFail($id);
 
-        return view('task.show', compact('sprint', 'task'));
+        // return view('task.show', compact('sprint', 'task'));
+        return view('task.show', compact('task'));
     }
 
     public function store(Request $request)
     {
-        // $task = Task::create($request->all());
-        DB::table('tasks')->insert([
-            'sprint_id' => $request->sprint_id,
-            'nama_task' => $request->nama_task,
-            'kesulitan_id' => $request->kesulitan_id,
-            'status' => '0'
-          ]);
+        $task = Task::create($request->all());
+        // DB::table('tasks')->insert([
+        //     'sprint_id' => $request->sprint_id,
+        //     'nama_task' => $request->nama_task,
+        //     'kesulitan_id' => $request->kesulitan_id,
+        //     'status' => $request->status
+        //   ]);
 
         return redirect()->route('task.index')->with('message', 'Task berhasil dibuat!');
     }

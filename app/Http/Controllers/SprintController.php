@@ -41,9 +41,10 @@ class SprintController extends Controller
     public function show($id)
     {
         $sprint = Sprint::findOrFail($id);
-        $task = Task::findOrFail($id);
+        // $task = Task::findOrFail($id);
 
-        return view('sprint.show', compact('sprint', 'task'));
+        // return view('sprint.show', compact('sprint', 'task'));
+        return view('sprint.show', compact('sprint'));
     }
 
     public function store(Request $request)
