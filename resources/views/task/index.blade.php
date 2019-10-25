@@ -4,7 +4,7 @@
 
 <div class="container">
     {{-- <a href="{{ route('task.create') }}">
-        <button type="button" class="btn btn-primary">Buat Task Baru</button>
+    <button type="button" class="btn btn-primary">Buat Task Baru</button>
     </a> --}}
     <h4>Daftar Task</h4>
 
@@ -18,7 +18,7 @@
         <thead class="thead-light">
             <tr>
                 <th scope="col">Sprint</th>
-                <th scope="col">Nama</th>
+                <th scope="col">Nama Task</th>
                 <th scope="col">Kesulitan</th>
                 <th scope="col">Status</th>
                 <th scope="col">CRUD</th>
@@ -27,10 +27,10 @@
         <tbody>
             @foreach($tasks as $task)
             <tr>
-                <td>{{ $task-> sprint_id }}</td>
-                <td>{{ $task-> nama_task }}</td>
-                <td>{{ $task-> kesulitan_id }}</td>
-                <td>{{ $task-> status }}</td>
+                <td>{{ $task -> sprint -> nama_sprint }}</td>
+                <td>{{ $task -> nama_task }}</td>
+                <td>{{ $task -> kesulitan_id }}</td>
+                <td>{{ $task -> status }}</td>
                 {{-- crud --}}
                 <td>
                     <form action="{{ route('task.destroy', $task->id) }}" method="post">

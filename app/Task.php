@@ -10,4 +10,8 @@ class Task extends Model
 
     protected $fillable = ['sprint_id', 'nama_task', 'kesulitan_id', 'status'];
 
+    public function sprint()
+    {
+    	return $this->belongsTo('App\Sprint');
+    }
 }

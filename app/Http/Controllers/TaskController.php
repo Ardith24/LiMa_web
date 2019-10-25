@@ -18,13 +18,18 @@ class TaskController extends Controller
 
     public function index()
     {
-        $tasks = Task::orderBy('id', 'ASC')->paginate(5);
+        // $tasks = Task::orderBy('id', 'ASC')->paginate(5);
+        $tasks = Task::with('sprint')->paginate(20);
         return view('task.index', compact('tasks'));
+
+        // $tasks = Task::all();
+    	// return view('task.index', compact('tasks'));
     }
 
     public function create()
     {
-        return view('task.create');
+        $tasks = Sprint::pluck('nama_sprint','id')->toArray();
+        return view('task.create', compact('tasks'));
     }
 
     public function edit($id)
