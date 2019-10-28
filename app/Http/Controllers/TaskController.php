@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Kesulitan;
 use App\Task;
 use App\Sprint;
 use Response;
@@ -19,23 +20,24 @@ class TaskController extends Controller
     public function index()
     {
         // $tasks = Task::orderBy('id', 'ASC')->paginate(5);
-        $tasks = Task::with('sprint')->paginate(20);
-        return view('task.index', compact('tasks'));
-
-        // $tasks = Task::all();
-    	// return view('task.index', compact('tasks'));
+        $tasks = Task::with('sprint')->orderBy('id', 'ASC')->paginate(20);
+        $kesulitans = Task::with('kesulitan')->paginate(20);
+        return view('task.index', compact('tasks', 'kesulitans'));
     }
 
     public function create()
     {
         $tasks = Sprint::pluck('nama_sprint','id')->toArray();
-        return view('task.create', compact('tasks'));
+        $kesulitans = Kesulitan::pluck('nama_tingkat', 'id')->toArray();
+        return view('task.create', compact('tasks', 'kesulitans'));
     }
 
     public function edit($id)
     {
+        $tasks = Sprint::pluck('nama_sprint','id')->toArray();
+        $kesulitans = Kesulitan::pluck('nama_tingkat', 'id')->toArray();
         $task = Task::findOrFail($id);
-        return view('task.edit', compact('task'));
+        return view('task.edit', compact('task', 'tasks', 'kesulitans'));
     }
 
     public function show_id(Task $task)
@@ -54,12 +56,17 @@ class TaskController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'nama_task' => 'required',
+            'status' => 'required'
+        ]);
+
         $task = Task::create($request->all());
         // DB::table('tasks')->insert([
         //     'sprint_id' => $request->sprint_id,
         //     'nama_task' => $request->nama_task,
         //     'kesulitan_id' => $request->kesulitan_id,
-        //     'status' => $request->status
+        //     'status' => '0'
         //   ]);
 
         return redirect()->route('task.index')->with('message', 'Task berhasil dibuat!');
@@ -67,6 +74,11 @@ class TaskController extends Controller
 
     public function update(Request $request, Task $task)
     {
+        $this->validate($request, [
+            'nama_task' => 'required',
+            'status' => 'required'
+        ]);
+
         $task->update($request->all());
 
         return redirect()->route('task.index')->with('message', 'Task berhasil diubah!');

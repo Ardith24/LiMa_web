@@ -13,8 +13,8 @@ class Sprint extends Model
 
     protected $fillable = ['nama_sprint', 'desc_sprint', 'tgl_mulai', 'tgl_selesai'];
 
-    public function task()
+    public function tasks()
     {
-    	return $this->hasMany(Task::class, 'sprint_id');
+    	return $this->hasMany('App\Task','sprint_id');
     }
 }

@@ -29,7 +29,7 @@
             <tr>
                 <td>{{ $task -> sprint -> nama_sprint }}</td>
                 <td>{{ $task -> nama_task }}</td>
-                <td>{{ $task -> kesulitan_id }}</td>
+                <td>{{ $task -> kesulitan -> nama_tingkat }}</td>
                 <td>{{ $task -> status }}</td>
                 {{-- crud --}}
                 <td>
@@ -37,7 +37,7 @@
                         {{csrf_field()}}
                         {{ method_field('DELETE') }}
                         <a href="{{ route('task.edit', $task->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return myFunction();">Hapus</button>
                         <i class='fas fa-edit'></i>
                     </form>
                 </td>
@@ -46,5 +46,12 @@
         </tbody>
     </table>
 </div>
+
+<script>
+    function myFunction() {
+        if (!confirm("Yakin mau hapus task ini?"))
+            event.preventDefault();
+    }
+</script>
 
 @endsection

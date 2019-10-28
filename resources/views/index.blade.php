@@ -105,6 +105,7 @@
               </a>
               <div class="dropdown-menu">
                 <a href="{{ route('sprint.index')}}" class="dropdown-item">Lihat Daftar Sprint</a>
+                <a href="{{ route('task.index')}}" class="dropdown-item">Lihat Daftar Task</a>
               </div>
             </li>
             @else
@@ -739,8 +740,7 @@
   <script src="{!! asset('theme/assets/js/argon.js')!!}"></script>
 
   <style>
-
-    a.no{
+    a.no {
       color: white;
     }
   </style>

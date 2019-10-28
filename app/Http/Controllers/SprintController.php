@@ -41,14 +41,20 @@ class SprintController extends Controller
     public function show($id)
     {
         $sprint = Sprint::findOrFail($id);
-        // $task = Task::findOrFail($id);
+        // $tasks = Sprint::has('tasks')->get();
 
-        // return view('sprint.show', compact('sprint', 'task'));
         return view('sprint.show', compact('sprint'));
     }
 
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'nama_sprint' => 'required',
+            'desc_sprint' => 'required',
+            'tgl_mulai' => 'required',
+            'tgl_selesai' => 'required'
+        ]);
+
         $sprint = Sprint::create($request->all());
 
         return redirect()->route('sprint.index')->with('message', 'Sprint berhasil dibuat!');
@@ -56,6 +62,13 @@ class SprintController extends Controller
 
     public function update(Request $request, Sprint $sprint)
     {
+        $this->validate($request, [
+            'nama_sprint' => 'required',
+            'desc_sprint' => 'required',
+            'tgl_mulai' => 'required',
+            'tgl_selesai' => 'required'
+        ]);
+
         $sprint->update($request->all());
 
         return redirect()->route('sprint.index')->with('message', 'Sprint berhasil diubah!');

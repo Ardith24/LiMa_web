@@ -14,4 +14,9 @@ class Task extends Model
     {
     	return $this->belongsTo('App\Sprint');
     }
+
+    public function kesulitan()
+    {
+    	return $this->belongsTo('App\Kesulitan');
+    }
 }
