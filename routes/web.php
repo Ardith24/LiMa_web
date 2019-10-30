@@ -25,5 +25,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 //CRUD Sprint
+// Route::get('/sprint/{id}', 'SprintController@show');
 Route::resource('/sprint', 'SprintController');
 Route::resource('/task', 'TaskController');

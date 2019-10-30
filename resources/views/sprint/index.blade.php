@@ -35,18 +35,24 @@
                 {{-- crud --}}
                 <td>
                     <form action="{{ route('sprint.show', $sprint->id) }}" method="GET">
-                        {{csrf_field()}}
+                        {{-- {{csrf_field()}} --}}
                         <button class="btn btn-primary" type="submit">
-                            Task <span class="badge">4</span>
+
+                            Task <span class="badge">
+                                {{-- @foreach ( as $s) --}}
+                                {{ $sprint-> tasks -> count() }}
+                                {{-- @endforeach --}}
+                            </span>
                         </button>
                     </form>
                 </td>
                 <td>
                     <form action="{{ route('sprint.destroy', $sprint->id) }}" method="post">
-                        {{csrf_field()}}
+                        {{-- {{csrf_field()}} --}}
                         {{ method_field('DELETE') }}
                         <a href="{{ route('sprint.edit', $sprint->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                        <button type="submit" class="btn btn-danger btn-sm" onclick="return myFunction();">Hapus</button>
+                        <button type="submit" class="btn btn-danger btn-sm"
+                            onclick="return myFunction();">Hapus</button>
                         <i class='fas fa-edit'></i>
                     </form>
                 </td>

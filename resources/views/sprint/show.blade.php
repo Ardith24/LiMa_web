@@ -15,19 +15,19 @@
                 <ul id="check-list-box" class="list-group">
                     <li class="list-group-item" data-color="success">
                         <h4>Judul:</h4>
-                        <p>{{ $sprint->nama_sprint }}</p>
+                        <p>{{ $sprint -> nama_sprint }}</p>
                     </li>
                     <li class="list-group-item" data-color="success">
                         <h4>Deskripsi:</h4>
-                        <p>{{ $sprint->desc_sprint }}</p>
+                        <p>{{ $sprint -> desc_sprint }}</p>
                     </li>
                     <li class="list-group-item" data-color="success">
                         <h4>Tanggal Mulai:</h4>
-                        <p>{{ $sprint->tgl_mulai }}</p>
+                        <p>{{ $sprint -> tgl_mulai }}</p>
                     </li>
                     <li class="list-group-item" data-color="success">
                         <h4>Tanggal Selesai:</h4>
-                        <p>{{ $sprint->tgl_selesai }}</p>
+                        <p>{{ $sprint -> tgl_selesai }}</p>
                     </li>
                 </ul>
                 <br />
@@ -40,10 +40,9 @@
             <h3 class="text-center">Task</h3>
             <div class="well" style="max-height: 500px; overflow: auto;">
                 <ul id="check-list-box" class="list-group checked-list-box">
-                    {{-- @foreach ($tasks as $task) --}}
-                        {{-- <li class="list-group-item">{{ $task -> count() }}</li> --}}
-                    {{-- @endforeach --}}
-                    {{-- <li class="list-group-item">{{ $task -> nama_task}}</li> --}}
+                    @foreach ($task as $t)
+                        <li class="list-group-item">{{ $t -> nama_task }}</li>
+                    @endforeach
                 </ul>
                 <br />
                 <button class="btn btn-primary col-xs-12" id="get-checked-data">Selesai</button>

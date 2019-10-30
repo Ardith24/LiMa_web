@@ -6,6 +6,7 @@ use App\Sprint;
 use App\Task;
 use Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SprintController extends Controller
 {
@@ -18,6 +19,8 @@ class SprintController extends Controller
 
     public function index()
     {
+        // $tasks = Sprint::has('tasks')->get();
+
         $sprints = Sprint::orderBy('id', 'ASC')->paginate(5);
         return view('sprint.index', compact('sprints'));
     }
@@ -40,10 +43,14 @@ class SprintController extends Controller
 
     public function show($id)
     {
-        $sprint = Sprint::findOrFail($id);
-        // $tasks = Sprint::has('tasks')->get();
 
-        return view('sprint.show', compact('sprint'));
+        $sprint = Sprint::findOrFail($id);
+        // $sprint = DB::table('sprints')->where('id',$id)->get();
+
+        // $tasks = Sprint::has('tasks')->get();
+        $task = DB::table('tasks')->where('sprint_id',$id)->get();
+
+        return view('sprint.show', ['sprint' => $sprint], ['task' => $task]);
     }
 
     public function store(Request $request)
