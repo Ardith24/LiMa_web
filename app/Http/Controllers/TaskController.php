@@ -20,8 +20,8 @@ class TaskController extends Controller
     public function index()
     {
         // $tasks = Task::orderBy('id', 'ASC')->paginate(5);
-        $tasks = Task::with('sprint')->orderBy('id', 'ASC')->paginate(20);
-        $kesulitans = Task::with('kesulitan')->paginate(20);
+        $tasks = Task::with('sprint')->orderBy('status')->paginate(5);
+        $kesulitans = Task::with('kesulitan')->paginate(5);
         return view('task.index', compact('tasks', 'kesulitans'));
     }
 
@@ -61,12 +61,18 @@ class TaskController extends Controller
             'status' => 'required'
         ]);
 
-        $task = Task::create($request->all());
+        Task::create([
+                'sprint_id' => $request->sprint_id,
+                'nama_task' => $request->nama_task,
+                'kesulitan_id' => $request->kesulitan_id,
+                'status' => false,
+        ]);
+
         // DB::table('tasks')->insert([
         //     'sprint_id' => $request->sprint_id,
         //     'nama_task' => $request->nama_task,
         //     'kesulitan_id' => $request->kesulitan_id,
-        //     'status' => '0'
+        //     'status' => false
         //   ]);
 
         return redirect()->route('task.index')->with('message', 'Task berhasil dibuat!');
@@ -80,6 +86,9 @@ class TaskController extends Controller
         ]);
 
         $task->update($request->all());
+        // $task->status = true;
+        // $task->save();
+
 
         return redirect()->route('task.index')->with('message', 'Task berhasil diubah!');
     }

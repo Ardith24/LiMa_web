@@ -27,4 +27,14 @@ Route::get('/home', 'HomeController@index')->name('home');
 //CRUD Sprint
 // Route::get('/sprint/{id}', 'SprintController@show');
 Route::resource('/sprint', 'SprintController');
-Route::resource('/task', 'TaskController');
+Route::resource('/task', 'TaskController');Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['middleware' => 'auth'], function () {
+	Route::resource('user', 'UserController', ['except' => ['show']]);
+	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
+	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
+	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
+});
+

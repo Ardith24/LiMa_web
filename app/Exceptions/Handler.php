@@ -2,8 +2,10 @@
 
 namespace App\Exceptions;
 
+use CloudCreativity\LaravelJsonApi\Exceptions\HandlesErrors;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Neomerx\JsonApi\Exceptions\JsonApiException;
 
 class Handler extends ExceptionHandler
 {
@@ -46,17 +48,31 @@ class Handler extends ExceptionHandler
      * @param  \Exception  $exception
      * @return \Illuminate\Http\Response
      */
-    public function render($request, Exception $exception)
+    public function render($request, Exception $e)
     {
-        if (
-            $exception instanceof ModelNotFoundException &&
-            $request->wantsJson()
-        ) {
-            return response()->json([
-                'data' => 'Resource not found'
-            ], 404);
+        // if (
+        //     $exception instanceof ModelNotFoundException &&
+        //     $request->wantsJson()
+        // ) {
+        //     return response()->json([
+        //         'data' => 'Resource not found'
+        //     ], 404);
+        // }
+
+        // return parent::render($request, $exception);
+
+        
+        if ($this->isJsonApi($request, $e)) {
+            return $this->renderJsonApi($request, $e);
+        }
+    }
+
+    protected function prepareException(Exception $e)
+    {
+        if ($e instanceof JsonApiException) {
+            return $this->prepareJsonApiException($e);
         }
 
-        return parent::render($request, $exception);
+        return parent::prepareException($e);
     }
 }

@@ -20,13 +20,18 @@
             @endif
         </div>
 
-        <div class="form-group {{ $errors->has('nama_task') ? 'has-error' : '' }}">
-            <label for="nama_task" class="control-label">Nama Task</label>
-            <input type="text" class="form-control" name="nama_task" placeholder="Nama Task">
-            @if ($errors->has('nama_task'))
-            <span class="help-block">{{ $errors->first('nama_task') }}</span>
-            @endif
-        </div>
+        <div class="form-group{{ $errors->has('nama_task') ? ' has-danger' : '' }}">
+                <label class="form-control-label" for="nama_task">{{ __('Nama Task') }}</label>
+                <input type="text" class="form-control" name="nama_task"
+                    class="form-control form-control-alternative{{ $errors->has('nama_task') ? ' is-invalid' : '' }}"
+                    placeholder="{{ __('Nama Task') }}" value="{{ old('nama_task') }}" required autofocus>
+                @if ($errors->has('nama_task'))
+                
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $errors->first('nama_task') }}</strong>
+                </span>
+                @endif
+            </div>
 
         <div class="form-group {{ $errors->has('kesulitan_id') ? 'has-error' : '' }}">
             <label for="kesulitan_id" class="control-label">Tingkat Kesulitan</label>

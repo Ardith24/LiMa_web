@@ -18,7 +18,7 @@ class CreateTasksTable extends Migration
             $table->integer('sprint_id')->unsigned();
             $table->string('nama_task');
             $table->integer('kesulitan_id')->unsigned();
-            $table->enum('status',['0','1']);
+            $table->boolean('status');
             $table->timestamps();
             
             $table->foreign('sprint_id')->references('id')->on('sprints');
