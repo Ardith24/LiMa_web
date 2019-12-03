@@ -1,53 +1,90 @@
-@extends('layouts.app')
+@extends('layouts.app', ['title' => __('Sprint')])
 
 @section('content')
+@include('users.partials.header', ['title' => __('Tambah Sprint Baru')])
 
-<div class="container">
-    <h4>Sprint Baru</h4>
-    <form action="{{ route('sprint.store') }}" method="post">
+<div class="container-fluid mt--7">
+    <div class="row">
+        <div class="col-xl-12 order-xl-1">
+            <div class="card bg-secondary shadow">
+                <div class="card-header bg-white border-0">
+                    <div class="row align-items-center">
+                        <div class="col-8">
+                            <h3 class="mb-0">{{ __('Sprint') }}</h3>
+                        </div>
+                        <div class="col-4 text-right">
+                            <a href="{{ route('sprint.index') }}"
+                                class="btn btn-sm btn-primary">{{ __('Back to list') }}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form method="post" action="{{ route('sprint.store') }}" autocomplete="off">
+                        {{csrf_field()}}
 
-        {{csrf_field()}}
-        <div class="form-group {{ $errors->has('nama_sprint') ? 'has-error' : '' }}">
-            <label for="nama_sprint" class="control-label">Judul</label>
-            <input type="text" class="form-control" name="nama_sprint" placeholder="Judul">
-            @if ($errors->has('nama_sprint'))
-            <span class="help-block">{{ $errors->first('nama_sprint') }}</span>
-            @endif
-        </div>
+                        <h6 class="heading-small text-muted mb-4">{{ __('Detail Sprint') }}</h6>
+                        <div class="pl-lg-4">
 
-        <div class="form-group {{ $errors->has('desc_sprint') ? 'has-error' : '' }}">
-            <label for="desc_sprint" class="control-label">Deskripsi</label>
-            <textarea name="desc_sprint" cols="30" rows="5" class="form-control"></textarea>
-            @if ($errors->has('desc_sprint'))
-            <span class="help-block">{{ $errors->first('desc_sprint') }}</span>
-            @endif
-        </div>
+                            <div class="form-group{{ $errors->has('nama_sprint') ? ' has-danger' : '' }}">
+                                <label class="form-control-label" for="nama_sprint">{{ __('Judul Sprint') }}</label>
+                                <input type="text" class="form-control" name="nama_sprint"
+                                    class="form-control form-control-alternative{{ $errors->has('nama_sprint') ? ' is-invalid' : '' }}"
+                                    placeholder="{{ __('Judul Sprint') }}" value="{{ old('nama_sprint') }}" required
+                                    autofocus>
+                                @if ($errors->has('nama_sprint'))
 
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="form-group {{ $errors->has('tgl_mulai') ? 'has-error' : '' }}">
-                    <label for="tgl_mulai" class="control-label">Tanggal Mulai</label>
-                    <input type='date' class="form-control" name="tgl_mulai" />
-                    @if ($errors->has('tgl_mulai'))
-                    <span class="help-block">{{ $errors->first('tgl_mulai') }}</span>
-                    @endif
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('nama_sprint') }}</strong>
+                                </span>
+                                @endif
+                            </div>
+
+                            <div class="form-group{{ $errors->has('desc_sprint') ? ' has-danger' : '' }}">
+                                <label class="form-control-label" for="desc_sprint">{{ __('Deskripsi Sprint') }}</label>
+                                <input type="text" class="form-control" name="desc_sprint"
+                                    class="form-control form-control-alternative{{ $errors->has('desc_sprint') ? ' is-invalid' : '' }}"
+                                    placeholder="{{ __('Deskripsi Sprint') }}" value="{{ old('desc_sprint') }}" required
+                                    autofocus>
+                                @if ($errors->has('desc_sprint'))
+
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('desc_sprint') }}</strong>
+                                </span>
+                                @endif
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group {{ $errors->has('tgl_mulai') ? 'has-error' : '' }}">
+                                        <label for="tgl_mulai" class="control-label">Tanggal Mulai</label>
+                                        <input type='date' class="form-control" name="tgl_mulai" />
+                                        @if ($errors->has('tgl_mulai'))
+                                        <span class="help-block">{{ $errors->first('tgl_mulai') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group {{ $errors->has('tgl_selesai') ? 'has-error' : '' }}">
+                                        <label for="tgl_selesai" class="control-label">Tanggal Selesai</label>
+                                        <input type='date' class="form-control" name="tgl_selesai"
+                                            placeholder="MM/DD/YYYY" />
+                                        @if ($errors->has('tgl_selesai'))
+                                        <span class="help-block">{{ $errors->first('tgl_selesai') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-success mt-4">{{ __('Save') }}</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-            <div class="col-sm-6">
-                <div class="form-group {{ $errors->has('tgl_selesai') ? 'has-error' : '' }}">
-                    <label for="tgl_selesai" class="control-label">Tanggal Selesai</label>
-                    <input type='date' class="form-control" name="tgl_selesai" placeholder="MM/DD/YYYY" />
-                    @if ($errors->has('tgl_selesai'))
-                    <span class="help-block">{{ $errors->first('tgl_selesai') }}</span>
-                    @endif
-                </div>
-            </div>
         </div>
+    </div>
 
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary">Simpan</button>
-            <a href="{{ route('sprint.index') }}" class="btn btn-default">Kembali</a>
-        </div>
-    </form>
-    @endsection
+    @include('layouts.footers.auth')
 </div>
+@endsection
