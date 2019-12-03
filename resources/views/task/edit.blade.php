@@ -31,7 +31,7 @@
                                     <select name="sprint_id" id="task" class="form-control" required="required">
                                         @foreach($tasks as $key => $lastName)
                                         @if($task->sprint->nama_sprint == $lastName)
-                                            <option selected value="{{ $task->sprint->nama_sprint }}">{{ $task->sprint->nama_sprint }}</option>
+                                            <option selected value="{{ $key }}">{{ $task->sprint->nama_sprint }}</option>
                                         @else
                                             <option value="{{ $key }}">{{ $lastName }}</option>
                                         @endif
@@ -61,7 +61,7 @@
                                     <select name="kesulitan_id" id="kesulitan" class="form-control">
                                             @foreach($kesulitans as $key => $lastName)
                                             @if($task->kesulitan->nama_tingkat == $lastName)
-                                                <option selected value="{{ $task->kesulitan->nama_tingkat }}">{{ $task->kesulitan->nama_tingkat }}</option>
+                                                <option selected value="{{ $key }}">{{ $task->kesulitan->nama_tingkat }}</option>
                                             @else
                                                 <option value="{{ $key }}">{{ $lastName }}</option>
                                             @endif
