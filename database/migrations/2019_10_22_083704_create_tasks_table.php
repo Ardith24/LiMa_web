@@ -21,8 +21,8 @@ class CreateTasksTable extends Migration
             $table->boolean('status');
             $table->timestamps();
             
-            $table->foreign('sprint_id')->references('id')->on('sprints');
-            $table->foreign('kesulitan_id')->references('id')->on('kesulitans');
+            $table->foreign('sprint_id')->references('id')->on('sprints')->onDelete('cascade');
+            $table->foreign('kesulitan_id')->references('id')->on('kesulitans')->onDelete('cascade');
         });
     }
 

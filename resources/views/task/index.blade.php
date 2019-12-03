@@ -3,48 +3,6 @@
 @section('content')
 @include('users.partials.header', ['title' => __('Tasks')])
 
-{{-- <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-4">
-            @if ($message = Session::get('message'))
-            <div class="alert alert-success martop-sm">
-                <p>{{ $message }}</p>
-</div>
-@endif
-
-<div class="card">
-    <div class="card-header">Tasks</div>
-
-    <div class="card-body">
-        <table class="table table-striped">
-            @foreach ($tasks as $task)
-            <tr>
-                <td>
-                    @if ($task->status)
-                    <s>{{ $task->nama_task }}</s>
-                    @else
-                    {{ $task->nama_task }}
-                    @endif
-                </td>
-                <td class="text-right">
-                    @if (! $task->status)
-                    <form method="post" action="{{ route('task.update', $task->id) }}">
-                        {{csrf_field()}}
-                        {{ method_field('PATCH') }}
-                        <button type="submit" class="btn btn-primary">Complete</button>
-                    </form>
-                    @endif
-                </td>
-            </tr>
-            @endforeach
-        </table>
-        {{ $tasks->links() }}
-    </div>
-</div>
-</div>
-</div>
-</div> --}}
-
 <div class="container-fluid mt--7">
     <div class="row">
         <div class="col">
@@ -58,6 +16,14 @@
                             <a href="{{ route('task.create') }}" class="btn btn-sm btn-primary">{{ __('Tambah Task') }}</a>
                         </div>
                     </div>
+                    <div class="container">
+                        progress:
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: {{ $percent }}%" aria-valuenow="{{ $percent }}"
+                                aria-valuemin="0" aria-valuemax="100">{{ $percent }}%</div>
+                        </div>
+                    </div>
+                </div>
                 </div>
 
                 <div class="col-12">
@@ -87,7 +53,14 @@
                                 <td>{{ $task -> sprint -> nama_sprint }}</td>
                                 <td>{{ $task -> nama_task }}</td>
                                 <td>{{ $task -> kesulitan -> nama_tingkat }}</td>
-                                <td>{{ $task -> status }}</td>
+                                {{-- <td>{{ $task -> status }}</td> --}}
+                                <td>
+                                    @if ($task -> status == 0)
+                                        <a href="#" class="badge badge-warning">Belum Selesai</a>
+                                    @elseif ($task -> status == 1)
+                                        <span class="badge badge-pill badge-success">Selesai</span>
+                                    @endif
+                                </td>
                                 <td class="text-right">
                                     <div class="dropdown">
                                         <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
@@ -125,46 +98,5 @@
 
     @include('layouts.footers.auth')
 </div>
-
-{{-- <div class="container">
-    <h4>Daftar Task</h4>
-
-    @if ($message = Session::get('message'))
-    <div class="alert alert-success martop-sm">
-        <p>{{ $message }}</p>
-</div>
-@endif
-
-<table class="table table-light">
-    <thead class="thead-light">
-        <tr>
-            <th scope="col">Sprint</th>
-            <th scope="col">Nama Task</th>
-            <th scope="col">Kesulitan</th>
-            <th scope="col">Status</th>
-            <th scope="col">CRUD</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($tasks as $task)
-        <tr>
-            <td>{{ $task -> sprint -> nama_sprint }}</td>
-            <td>{{ $task -> nama_task }}</td>
-            <td>{{ $task -> kesulitan -> nama_tingkat }}</td>
-            <td>{{ $task -> status }}</td>
-            <td>
-                <form action="{{ route('task.destroy', $task->id) }}" method="post">
-                    {{csrf_field()}}
-                    {{ method_field('DELETE') }}
-                    <a href="{{ route('task.edit', $task->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                    <button type="submit" class="btn btn-danger btn-sm" onclick="return myFunction();">Hapus</button>
-                    <i class='fas fa-edit'></i>
-                </form>
-            </td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
-</div> --}}
 
 @endsection

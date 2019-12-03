@@ -20,9 +20,18 @@ class TaskController extends Controller
     public function index()
     {
         // $tasks = Task::orderBy('id', 'ASC')->paginate(5);
-        $tasks = Task::with('sprint')->orderBy('status')->paginate(5);
+        $tasks = Task::with('sprint')->orderBy('status')->paginate(5);        
         $kesulitans = Task::with('kesulitan')->paginate(5);
-        return view('task.index', compact('tasks', 'kesulitans'));
+
+        $wl = Task::whereIn('status', ['1'])->count();
+        $total = Task::count();
+        if ($total != 0) {
+            $percent = round($wl / $total * 100);
+        } else {
+            $percent = 0;
+        }
+        
+        return view('task.index', compact('tasks', 'kesulitans', 'percent'));
     }
 
     public function create()
@@ -37,6 +46,7 @@ class TaskController extends Controller
         $tasks = Sprint::pluck('nama_sprint','id')->toArray();
         $kesulitans = Kesulitan::pluck('nama_tingkat', 'id')->toArray();
         $task = Task::findOrFail($id);
+        
         return view('task.edit', compact('task', 'tasks', 'kesulitans'));
     }
 

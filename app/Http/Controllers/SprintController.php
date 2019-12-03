@@ -81,9 +81,10 @@ class SprintController extends Controller
         return redirect()->route('sprint.index')->with('message', 'Sprint berhasil diubah!');
     }
 
-    public function destroy(Sprint $sprint)
+    public function destroy($id)
     {
-        $sprint->delete();
+        DB::table('sprints')->where('id', $id)->delete();
+        DB::table('tasks')->where('sprint_id', $id)->delete();
 
         return redirect()->route('sprint.index')->with('message'. 'Sprint berhasil dihapus!');
     }
