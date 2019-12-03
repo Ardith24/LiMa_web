@@ -40,11 +40,11 @@
                     <table class="table align-items-center table-flush">
                         <thead class="thead-light">
                             <tr>
-                                <th scope="col">{{ __('Sprint') }}</th>
-                                <th scope="col">{{ __('Nama Task') }}</th>
-                                <th scope="col">{{ __('Level') }}</th>
-                                <th scope="col">{{ __('Status') }}</th>
-                                <th scope="col"></th>
+                                <th scope="col" class="text-sm">{{ __('Sprint') }}</th>
+                                <th scope="col" class="text-sm">{{ __('Nama Task') }}</th>
+                                <th scope="col" class="text-sm">{{ __('Level') }}</th>
+                                <th scope="col" class="text-sm">{{ __('Status') }}</th>
+                                <th scope="col" class="text-sm"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -58,7 +58,7 @@
                                     @if ($task -> status == 0)
                                         <a href="#" class="badge badge-warning">Belum Selesai</a>
                                     @elseif ($task -> status == 1)
-                                        <span class="badge badge-pill badge-success">Selesai</span>
+                                        <span class="badge-sm badge-pill badge-success">Selesai</span>
                                     @endif
                                 </td>
                                 <td class="text-right">
