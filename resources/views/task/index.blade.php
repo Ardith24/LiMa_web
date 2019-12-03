@@ -16,13 +16,26 @@
                             <a href="{{ route('task.create') }}" class="btn btn-sm btn-primary">{{ __('Tambah Task') }}</a>
                         </div>
                     </div>
-                    <div class="container">
+                    <div class="progress-wrapper">
+                        <div class="progress-info">
+                          <div class="progress-label">
+                            <span>Task Selesai</span>
+                          </div>
+                          <div class="progress-percentage">
+                            <span>{{ $percent }}%</span>
+                          </div>
+                        </div>
+                        <div class="progress">
+                          <div class="progress-bar bg-success" role="progressbar" aria-valuenow="{{ $percent }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $percent }}%"></div>
+                        </div>
+                      </div>
+                    {{-- <div class="container">
                         progress:
                         <div class="progress" style="height: 15px;">
                             <div class="progress-bar" role="progressbar" style="width: {{ $percent }}%" aria-valuenow="{{ $percent }}"
                                 aria-valuemin="0" aria-valuemax="100">{{ $percent }}%</div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
                 </div>
 
