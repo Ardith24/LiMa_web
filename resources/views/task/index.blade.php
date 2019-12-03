@@ -18,7 +18,7 @@
                     </div>
                     <div class="container">
                         progress:
-                        <div class="progress">
+                        <div class="progress" style="height: 15px;">
                             <div class="progress-bar" role="progressbar" style="width: {{ $percent }}%" aria-valuenow="{{ $percent }}"
                                 aria-valuemin="0" aria-valuemax="100">{{ $percent }}%</div>
                         </div>
