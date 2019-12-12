@@ -51,11 +51,8 @@
                                     <form action="{{ route('sprint.show', $sprint->id) }}" method="GET">
                                         {{-- {{csrf_field()}} --}}
                                         <button class="btn btn-primary" type="submit">
-
                                             Task <span class="badge">
-                                                {{-- @foreach ( as $s) --}}
-                                                {{ $sprint-> tasks -> count() }}
-                                                {{-- @endforeach --}}
+                                                {{ $sprint-> task -> count() }}
                                             </span>
                                         </button>
                                     </form>
