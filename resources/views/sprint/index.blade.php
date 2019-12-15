@@ -95,25 +95,4 @@
     @include('layouts.footers.auth')
 </div>
 
-<script>
-    var inputProgress = document.getElementById('progress');
-    var ProgressBar = document.getElementsByClassName('progress-bar');
-
-    inputProgress.onkeyup = function (e) {
-        ProgressBar[0].style.width = inputProgress.value + '%';
-    };
-
-    $('#exampleModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget) // Button that triggered the modal
-        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-        var modal = $(this)
-    })
-
-    function myFunction() {
-        if (!confirm("Yakin mau hapus sprint ini?"))
-            event.preventDefault();
-    }
-</script>
-
 @endsection
