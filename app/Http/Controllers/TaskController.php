@@ -20,8 +20,8 @@ class TaskController extends Controller
     public function index()
     {
         // $tasks = Task::orderBy('id', 'ASC')->paginate(5);
-        $tasks = Task::with('sprint')->orderBy('status')->paginate(5);        
-        $kesulitans = Task::with('kesulitan')->paginate(5);
+        $tasks = Task::with('sprint')->orderBy('status')->paginate(5);      
+        $kesulitan = Task::with('kesulitan')->paginate(5);
 
         $wl = Task::whereIn('status', ['1'])->count();
         $total = Task::count();
@@ -31,7 +31,7 @@ class TaskController extends Controller
             $percent = 0;
         }
         
-        return view('task.index', compact('tasks', 'kesulitans', 'percent'));
+        return view('task.index', compact('tasks', 'kesulitan', 'percent'));
     }
 
     public function create()

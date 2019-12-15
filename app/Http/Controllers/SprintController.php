@@ -45,12 +45,9 @@ class SprintController extends Controller
     {
 
         $sprint = Sprint::findOrFail($id);
-        // $sprint = DB::table('sprints')->where('id',$id)->get();
+        $task = Task::with('sprint')->orderBy('status')->where('sprint_id',$id)->get();
 
-        // $tasks = Sprint::has('tasks')->get();
-        $task = DB::table('tasks')->where('sprint_id',$id)->get();
-
-        return view('sprint.show', ['sprint' => $sprint], ['task' => $task]);
+        return view('sprint.show', compact('task', 'sprint'));
     }
 
     public function store(Request $request)
@@ -64,6 +61,20 @@ class SprintController extends Controller
 
         $sprint = Sprint::create($request->all());
 
+        return redirect()->route('sprint.index')->with('message', 'Sprint berhasil dibuat!');
+    }
+
+    public function store_api()
+    {
+        $this->json('post', '/api/tasks')
+            ->assertStatus(422)
+            ->assertJson([
+                'nama_sprint' => ['Nama harus diisi'],
+                'desc_sprint' => ['Deskripsi harus diisi'],
+                'tgl_mulai' => ['Harap diisi'],
+                'tgl_selesai' => ['Harap diisi'],
+            ]);
+        
         return redirect()->route('sprint.index')->with('message', 'Sprint berhasil dibuat!');
     }
 
