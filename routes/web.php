@@ -28,6 +28,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 // Route::get('/sprint/{id}', 'SprintController@show');
 Route::resource('/sprint', 'SprintController');
 Route::resource('/task', 'TaskController');Auth::routes();
+Route::get('task/status/{id}', 'TaskController@mark');
 
 Route::get('/home', 'HomeController@index')->name('home');
 

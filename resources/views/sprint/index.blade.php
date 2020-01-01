@@ -36,7 +36,7 @@
                                 <th scope="col">{{ __('Deskripsi') }}</th>
                                 <th scope="col">{{ __('Tanggal Mulai') }}</th>
                                 <th scope="col">{{ __('Tanggal Selesai') }}</th>
-                                <th scope="col">{{ __('Status') }}</th>
+                                <th scope="col">{{ __('Task') }}</th>
                                 <th scope="col"></th>
                             </tr>
                         </thead>
@@ -49,9 +49,10 @@
                                 <td>{{ $sprint -> tgl_selesai }}</td>
                                 <td>
                                     <form action="{{ route('sprint.show', $sprint->id) }}" method="GET">
-                                        {{-- {{csrf_field()}} --}}
+                                        {{csrf_field()}}
                                         <button class="btn btn-primary" type="submit">
-                                            Task <span class="badge">
+                                            <i class="fas fa-tasks"></i>
+                                            <span class="badge">
                                                 {{ $sprint-> task -> count() }}
                                             </span>
                                         </button>

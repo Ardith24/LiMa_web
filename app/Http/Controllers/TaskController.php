@@ -12,14 +12,12 @@ class TaskController extends Controller
 {
     public function index_api()
     {
-        // do this
         $get_data = array('results' => Task::all());
         return $get_data;
     }
 
     public function index()
     {
-        // $tasks = Task::orderBy('id', 'ASC')->paginate(5);
         $tasks = Task::with('sprint')->orderBy('status')->paginate(5);      
         $kesulitan = Task::with('kesulitan')->paginate(5);
 
@@ -78,13 +76,6 @@ class TaskController extends Controller
                 'status' => false,
         ]);
 
-        // DB::table('tasks')->insert([
-        //     'sprint_id' => $request->sprint_id,
-        //     'nama_task' => $request->nama_task,
-        //     'kesulitan_id' => $request->kesulitan_id,
-        //     'status' => false
-        //   ]);
-
         return redirect()->route('task.index')->with('message', 'Task berhasil dibuat!');
     }
 
@@ -96,11 +87,23 @@ class TaskController extends Controller
         ]);
 
         $task->update($request->all());
-        // $task->status = true;
-        // $task->save();
 
 
-        return redirect()->route('task.index')->with('message', 'Task berhasil diubah!');
+        return redirect()->back()->with('message', 'Task berhasil diubah!');
+    }
+
+    public function mark($id){
+        $task = Task::findOrFail($id);
+
+        if($task->status == true){
+            $ganti = false;
+        }else{
+            $ganti = true;
+        }
+
+        Task::where('id',$id)->update(['status' => $ganti]);
+        
+        return redirect()->back();
     }
 
     public function destroy(Task $task)

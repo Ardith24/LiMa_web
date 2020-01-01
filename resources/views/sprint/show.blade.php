@@ -3,51 +3,6 @@
 @section('content')
 @include('layouts.headers.cards')
 
-{{-- <div class="container" style="margin-top:20px;">
-    <div class="row">
-        <div class="col-xs-6">
-            <a href="{{ route('sprint.index') }}" class="btn btn-default">Kembali</a>
-<h3 class="text-center">Sprint</h3>
-<div class="well" style="max-height: 500px; overflow: auto;">
-    <ul id="check-list-box" class="list-group">
-        <li class="list-group-item" data-color="success">
-            <h4>Judul:</h4>
-            <p>{{ $sprint -> nama_sprint }}</p>
-        </li>
-        <li class="list-group-item" data-color="success">
-            <h4>Deskripsi:</h4>
-            <p>{{ $sprint -> desc_sprint }}</p>
-        </li>
-        <li class="list-group-item" data-color="success">
-            <h4>Tanggal Mulai:</h4>
-            <p>{{ $sprint -> tgl_mulai }}</p>
-        </li>
-        <li class="list-group-item" data-color="success">
-            <h4>Tanggal Selesai:</h4>
-            <p>{{ $sprint -> tgl_selesai }}</p>
-        </li>
-    </ul>
-    <br />
-</div>
-</div>
-<div class="col-xs-6">
-    <a href="{{ route('task.create') }}">
-        <button type="button" class="btn btn-default">Tambah Task</button>
-    </a>
-    <h3 class="text-center">Task</h3>
-    <div class="well" style="max-height: 500px; overflow: auto;">
-        <ul id="check-list-box" class="list-group checked-list-box">
-            @foreach ($task as $t)
-            <li class="list-group-item">{{ $t -> nama_task }}</li>
-            @endforeach
-        </ul>
-        <br />
-        <button class="btn btn-primary col-xs-12" id="get-checked-data">Selesai</button>
-    </div>
-</div>
-</div>
-</div> --}}
-
 <div class="container-fluid mt--7">
     <div class="row mt-5">
         <div class="col-xl-8 mb-5 mb-xl-0">
@@ -61,6 +16,21 @@
                             <a href="{{ route('task.index') }}" class="btn btn-sm btn-primary">Lihat Semua</a>
                         </div>
                     </div>
+                    <div class="progress-wrapper">
+                        <div class="progress-info">
+                            <div class="progress-label">
+                                <span>Task Selesai</span>
+                            </div>
+                            <div class="progress-percentage">
+                                <span>100%</span>
+                            </div>
+                        </div>
+                        <div class="progress" style="height: 1rem">
+                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="{{ $percent }}"
+                                aria-valuemin="0" aria-valuemax="100" style="width: {{ $percent }}%">{{ $percent }}%
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="table-responsive">
                     <!-- Projects table -->
@@ -70,6 +40,7 @@
                                 <th scope="col">Nama Task</th>
                                 <th scope="col">Level</th>
                                 <th scope="col">Status</th>
+                                <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -83,9 +54,55 @@
                                 </td>
                                 <td>
                                     @if ($t -> status == 0)
-                                    <a href="#" class="badge badge-warning">Belum Selesai</a>
+                                    <a href="{{ url('task/status/'.$t->id) }}" class="badge badge-warning">Belum
+                                        Selesai</a>
                                     @elseif ($t -> status == 1)
                                     <span class="badge-sm badge-pill badge-success">Selesai</span>
+                                    @endif
+                                </td>
+                                <td class="text-right">
+                                    @if ($t -> status == 0)
+                                    <div class="dropdown">
+                                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                            <form action="{{ route('task.destroy', $t->id) }}" method="post">
+                                                {{csrf_field()}}
+                                                {{ method_field('DELETE') }}
+
+                                                <a class="dropdown-item"
+                                                    href="{{ route('task.edit', $t->id) }}">{{ __('Edit') }}</a>
+                                                <button type="button" class="dropdown-item"
+                                                    onclick="confirm('{{ __("Yakin mau hapus task ini?") }}') ? this.parentElement.submit() : ''">
+                                                    {{ __('Hapus') }}
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    @elseif ($t -> status == 1)
+                                    <div class="dropdown">
+                                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                            <form action="{{ route('task.destroy', $t->id) }}" method="post">
+                                                {{csrf_field()}}
+                                                {{ method_field('DELETE') }}
+
+                                                <a class="dropdown-item"
+                                                    href="{{ route('task.edit', $t->id) }}">{{ __('Edit') }}</a>
+                                                <button type="button" class="dropdown-item"
+                                                    onclick="confirm('{{ __("Yakin mau hapus task ini?") }}') ? this.parentElement.submit() : ''">
+                                                    {{ __('Hapus') }}
+                                                </button>
+                                                <a class="dropdown-item"
+                                                    href="{{ url('task/status/'.$t->id) }}">{{ __('Tandai belum selesai') }}</a>
+                                            </form>
+                                        </div>
+                                    </div>
                                     @endif
                                 </td>
                             </tr>

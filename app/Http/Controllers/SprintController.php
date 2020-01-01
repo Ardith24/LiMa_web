@@ -12,15 +12,12 @@ class SprintController extends Controller
 {
     public function index_api()
     {
-        // do this
         $get_data = array('results' => Sprint::all());
         return $get_data;
     }
 
     public function index()
     {
-        // $tasks = Sprint::has('tasks')->get();
-
         $sprints = Sprint::orderBy('id', 'ASC')->paginate(5);
         return view('sprint.index', compact('sprints'));
     }
@@ -43,11 +40,18 @@ class SprintController extends Controller
 
     public function show($id)
     {
-
         $sprint = Sprint::findOrFail($id);
         $task = Task::with('sprint')->orderBy('status')->where('sprint_id',$id)->get();
+        
+        $wl = Task::with('sprint')->orderBy('status')->where('sprint_id',$id)->whereIn('status', ['1'])->count();
+        $total = Task::with('sprint')->orderBy('status')->where('sprint_id',$id)->count();
+        if ($total != 0) {
+            $percent = round($wl / $total * 100);
+        } else {
+            $percent = 0;
+        }
 
-        return view('sprint.show', compact('task', 'sprint'));
+        return view('sprint.show', compact('task', 'sprint', 'percent'));
     }
 
     public function store(Request $request)
@@ -59,23 +63,24 @@ class SprintController extends Controller
             'tgl_selesai' => 'required'
         ]);
 
-        $sprint = Sprint::create($request->all());
+        Sprint::create($request->all());
 
         return redirect()->route('sprint.index')->with('message', 'Sprint berhasil dibuat!');
     }
 
-    public function store_api()
+    public function store_api(Request $request)
     {
-        $this->json('post', '/api/tasks')
-            ->assertStatus(422)
-            ->assertJson([
-                'nama_sprint' => ['Nama harus diisi'],
-                'desc_sprint' => ['Deskripsi harus diisi'],
-                'tgl_mulai' => ['Harap diisi'],
-                'tgl_selesai' => ['Harap diisi'],
-            ]);
-        
-        return redirect()->route('sprint.index')->with('message', 'Sprint berhasil dibuat!');
+        $this->validate($request, [
+            'nama_sprint' => 'required',
+            'desc_sprint' => 'required',
+            'tgl_mulai' => 'required',
+            'tgl_selesai' => 'required'
+        ]);
+
+        Sprint::create($request->all());
+
+        $get_data = $request->all();
+        return $get_data;
     }
 
     public function update(Request $request, Sprint $sprint)

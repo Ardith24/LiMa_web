@@ -106,11 +106,6 @@
                                     {{ __('Sprint') }}
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('task.index') }}">
-                                    {{ __('Task') }}
-                                </a>
-                            </li>
                         </ul>
                     </div>
                 </li>
