@@ -13,7 +13,8 @@
                             <h3 class="mb-0">{{ $sprint->nama_sprint }} - Task</h3>
                         </div>
                         <div class="col text-right">
-                            <a href="{{ route('task.index') }}" class="btn btn-sm btn-primary">Lihat Semua</a>
+                            <a href="{{ route('task.index') }}" class="btn btn-sm btn-primary">Semua Task</a>
+                            <a href="{{ route('task.create') }}" class="btn btn-sm btn-primary">Task Baru</a>
                         </div>
                     </div>
                     <div class="progress-wrapper">

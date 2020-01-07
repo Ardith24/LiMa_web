@@ -61,7 +61,7 @@
                                 <label class="form-control-label" for="desc_sprint">{{ __('Deskripsi Sprint') }}</label>
                                 <input type="text" class="form-control" name="desc_sprint"
                                     class="form-control form-control-alternative{{ $errors->has('desc_sprint') ? ' is-invalid' : '' }}"
-                                    placeholder="{{ __('Deskripsi Sprint') }}" value="{{ $sprint->desc_sprint }}" required
+                                    placeholder="{{ __('Deskripsi Sprint') }}" value="{{ $sprint->desc_sprintgit }}" required
                                     autofocus>
                                 @if ($errors->has('desc_sprint'))
 
