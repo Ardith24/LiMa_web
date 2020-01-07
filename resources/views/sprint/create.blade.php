@@ -41,11 +41,10 @@
 
                             <div class="form-group{{ $errors->has('desc_sprint') ? ' has-danger' : '' }}">
                                 <label class="form-control-label" for="desc_sprint">{{ __('Deskripsi Sprint') }}</label>
-                                <textarea type="text" name="desc_sprint"
+                                <input type="text" class="form-control" name="desc_sprint"
                                     class="form-control form-control-alternative{{ $errors->has('desc_sprint') ? ' is-invalid' : '' }}"
-                                    id="exampleFormControlTextarea1" rows="3" placeholder="Masukkan deskripsi..."
                                     placeholder="{{ __('Deskripsi Sprint') }}" value="{{ old('desc_sprint') }}" required
-                                    autofocus></textarea>
+                                    autofocus>
                                 @if ($errors->has('desc_sprint'))
 
                                 <span class="invalid-feedback" role="alert">
