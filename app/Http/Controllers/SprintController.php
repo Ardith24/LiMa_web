@@ -97,6 +97,26 @@ class SprintController extends Controller
         return redirect()->route('sprint.index')->with('message', 'Sprint berhasil diubah!');
     }
 
+    public function update_api(Request $request, Sprint $sprint)
+    {
+        $this->validate($request, [
+            'nama_sprint' => 'required',
+            'desc_sprint' => 'required',
+            'tgl_mulai' => 'required',
+            'tgl_selesai' => 'required'
+        ]);
+
+        return $sprint->update($request->all());
+    }
+
+    public function delete_api($id)
+    {
+        DB::table('sprints')->where('id', $id)->delete();
+        DB::table('tasks')->where('sprint_id', $id)->delete();
+
+        return 'delete success'
+    }
+
     public function destroy($id)
     {
         DB::table('sprints')->where('id', $id)->delete();

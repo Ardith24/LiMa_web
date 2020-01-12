@@ -21,8 +21,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('sprints', 'SprintController@index_api');
 Route::get('sprints/{sprint}', 'SprintController@show_id');
 Route::post('sprints', 'SprintController@store_api');
-Route::put('sprints/{sprint}', 'SprintController@update');
-Route::delete('sprints/{sprint}', 'SprintController@delete');
+Route::put('sprints/{sprint}', 'SprintController@update_api');
+Route::delete('sprints/{sprint}', 'SprintController@delete_api');
 
 Route::get('tasks', 'TaskController@index_api');
 Route::get('tasks/{task}', 'TaskController@show_id');
