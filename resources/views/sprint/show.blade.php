@@ -134,7 +134,7 @@
                                     Nama Sprint :
                                 </th>
                                 <td>
-                                    {{ $sprint -> nama_sprint }}
+                                    <span class="h4 font-weight-bold mb-0">{{ $sprint -> nama_sprint }}</span>
                                 </td>
                             </tr>
                             <tr>
@@ -142,7 +142,7 @@
                                     Deskripsi Sprint :
                                 </th>
                                 <td>
-                                    {{ $sprint -> desc_sprint }}
+                                    <span class="h4 font-weight-bold mb-0">{{ $sprint -> desc_sprint }}</span>
                                 </td>
                             </tr>
                             <tr>
@@ -150,7 +150,7 @@
                                     Tanggal Mulai :
                                 </th>
                                 <td>
-                                    {{ $sprint -> tgl_mulai }}
+                                    <span class="h4 font-weight-bold mb-0">{{ $sprint -> tgl_mulai }}</span>
                                 </td>
                             </tr>
                             <tr>
@@ -158,7 +158,7 @@
                                     Tanggal Mulai :
                                 </th>
                                 <td>
-                                    {{ $sprint -> tgl_selesai }}
+                                    <span class="h4 font-weight-bold mb-0">{{ $sprint -> tgl_selesai }}</span>
                                 </td>
                             </tr>
                             <tr>
@@ -166,8 +166,17 @@
                                     Jumlah Task :
                                 </th>
                                 <td>
-                                    {{ $task -> count() }}
+                                    <span class="h4 font-weight-mid mb-0">{{ $task -> count() }}</span>
                                 </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    Velocity :
+                                </th>
+                                <th>
+                                    <h5 class="card-title text-uppercase text-muted mb-0">Bobot</h5>
+                                    <span class="h2 font-weight-bold mb-0">{{ $velo }}/{{ $total2 }}</span>
+                                </th>
                             </tr>
                         </tbody>
                     </table>
