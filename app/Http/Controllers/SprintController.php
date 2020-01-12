@@ -43,15 +43,25 @@ class SprintController extends Controller
         $sprint = Sprint::findOrFail($id);
         $task = Task::with('sprint')->orderBy('status')->where('sprint_id',$id)->get();
         
+        //progress sprint berdasarkan task selesai
         $wl = Task::with('sprint')->orderBy('status')->where('sprint_id',$id)->whereIn('status', ['1'])->count();
         $total = Task::with('sprint')->orderBy('status')->where('sprint_id',$id)->count();
+        
         if ($total != 0) {
             $percent = round($wl / $total * 100);
         } else {
             $percent = 0;
         }
 
-        return view('sprint.show', compact('task', 'sprint', 'percent'));
+        //velocity = Total Bobot (done) / Total bobot Keseluruhan (Per Sprint)
+        $velo = DB::table('tasks')->join('kesulitans', 'tasks.kesulitan_id', '=', 'kesulitans.id')
+                                    ->where('sprint_id', $id)
+                                    ->whereIn('status', ['1'])
+                                    ->sum('kesulitans.bobot');
+        $total2 = DB::table('tasks')->join('kesulitans', 'tasks.kesulitan_id', '=', 'kesulitans.id')
+                                    ->sum('kesulitans.bobot');
+
+        return view('sprint.show', compact('task', 'sprint', 'percent', 'velo', 'total2'));
     }
 
     public function store(Request $request)
