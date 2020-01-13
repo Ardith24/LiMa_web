@@ -79,6 +79,21 @@ class TaskController extends Controller
         return redirect()->route('task.index')->with('message', 'Task berhasil dibuat!');
     }
 
+    public function store_api(Request $request)
+    {
+        $this->validate($request, [
+            'sprint_id' => 'required',
+            'nama_task' => 'required',
+            'status' => 'required',
+            'kesulitan_id' => 'required'
+        ]);
+
+        Task::create($request->all());
+
+        $get_data = $request->all();
+        return $get_data;
+    }
+
     public function update(Request $request, Task $task)
     {
         $this->validate($request, [
@@ -90,6 +105,12 @@ class TaskController extends Controller
 
 
         return redirect()->back()->with('message', 'Task berhasil diubah!');
+    }
+
+    public function update_api(Request $request, Task $task)
+    {        
+        $task->update($request->all());
+        return $request->all()
     }
 
     public function mark($id){
@@ -111,5 +132,12 @@ class TaskController extends Controller
         $task->delete();
 
         return redirect()->route('task.index')->with('message'. 'Task berhasil dihapus!');
+    }
+
+    public function delete_api(Task $task)
+    {
+        $task->delete();
+
+        return 'Task berhasil di hapus';
     }
 }

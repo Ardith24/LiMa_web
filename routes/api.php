@@ -26,6 +26,6 @@ Route::delete('sprints/{sprint}', 'SprintController@delete_api');
 
 Route::get('tasks', 'TaskController@index_api');
 Route::get('tasks/{task}', 'TaskController@show_id');
-Route::post('tasks', 'TaskController@store');
-Route::put('tasks/{task}', 'TaskController@update');
-Route::delete('tasks/{sprint}', 'TaskController@delete');
+Route::post('tasks', 'TaskController@store_api');
+Route::put('tasks/{task}', 'TaskController@update_api');
+Route::delete('tasks/{task}', 'TaskController@delete_api');

@@ -89,8 +89,7 @@ class SprintController extends Controller
 
         Sprint::create($request->all());
 
-        $get_data = $request->all();
-        return $get_data;
+        return $request->all();
     }
 
     public function update(Request $request, Sprint $sprint)
@@ -116,7 +115,8 @@ class SprintController extends Controller
             'tgl_selesai' => 'required'
         ]);
 
-        return $sprint->update($request->all());
+        $sprint->update($request->all());
+        return $request->all()
     }
 
     public function delete_api($id)
@@ -124,7 +124,7 @@ class SprintController extends Controller
         DB::table('sprints')->where('id', $id)->delete();
         DB::table('tasks')->where('sprint_id', $id)->delete();
 
-        return 'delete success'
+        return 'delete success';
     }
 
     public function destroy($id)
