@@ -116,7 +116,7 @@ class SprintController extends Controller
         ]);
 
         $sprint->update($request->all());
-        return $request->all()
+        return $request->all();
     }
 
     public function delete_api($id)
@@ -124,7 +124,7 @@ class SprintController extends Controller
         DB::table('sprints')->where('id', $id)->delete();
         DB::table('tasks')->where('sprint_id', $id)->delete();
 
-        return 'delete success';
+        return redirect()->route('sprint.index')->with('message'. 'Sprint berhasil dihapus!');
     }
 
     public function destroy($id)
