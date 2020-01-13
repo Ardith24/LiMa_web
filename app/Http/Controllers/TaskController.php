@@ -90,8 +90,7 @@ class TaskController extends Controller
 
         Task::create($request->all());
 
-        $get_data = $request->all();
-        return $get_data;
+        return $request->all();
     }
 
     public function update(Request $request, Task $task)
