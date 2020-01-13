@@ -110,7 +110,7 @@ class TaskController extends Controller
     public function update_api(Request $request, Task $task)
     {        
         $task->update($request->all());
-        return $request->all()
+        return $request->all();
     }
 
     public function mark($id){
