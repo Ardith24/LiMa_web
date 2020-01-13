@@ -103,7 +103,7 @@ class TaskController extends Controller
         $task->update($request->all());
 
 
-        return redirect()->back()->with('message', 'Task berhasil diubah!');
+        return redirect()->route('sprint.index')->with('message', 'Task berhasil diubah!');
     }
 
     public function update_api(Request $request, Task $task)
